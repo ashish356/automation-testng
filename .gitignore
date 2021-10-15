@@ -1,2 +1,8 @@
-# Project exclude paths
-/target/
+*.iml
+*.iws
+*.ipr
+.idea/
+target/
+reports/
+rerun/
+debug.log
