@@ -19,12 +19,13 @@
     <junit.version>4.12</junit.version>
     <poi.version>3.17</poi.version>
 
-    <selenium.version>4.0.0</selenium.version>
+    <selenium.version>3.141.59</selenium.version>
     <selenium-htmlunit-driver>2.52.0</selenium-htmlunit-driver>
     <spring-boot-dependencies.version>2.1.7.RELEASE</spring-boot-dependencies.version>
     <rest-assured.version>4.0.0</rest-assured.version>
     <spring-data.version>2.2.0.RELEASE</spring-data.version>
     <testng.version>7.4.0</testng.version>
+    <webdrivermanager.version>5.0.3</webdrivermanager.version>
 
   </properties>
 
@@ -56,10 +57,18 @@
     </dependency>
 
     <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>${webdrivermanager.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <scope>test</scope>
     </dependency>
+
+
 
     <dependency>
       <groupId>org.springframework</groupId>
