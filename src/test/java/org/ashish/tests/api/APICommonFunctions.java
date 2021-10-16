@@ -1,6 +1,8 @@
 package org.ashish.tests.api;
 
 import io.restassured.RestAssured;
+import org.eclipse.jetty.http.HttpStatus;
+import org.testng.Assert;
 
 public class APICommonFunctions {
 
@@ -56,7 +58,7 @@ public class APICommonFunctions {
                 .post(endPointUri)
                 .asString();
     }
-    protected  String  getJsonResponseBodyForGetRequest(String endPointUri)
+    protected String  getJsonResponseBodyForGetRequest(String endPointUri)
     {
         return RestAssured.with()
                 .given()
@@ -64,5 +66,22 @@ public class APICommonFunctions {
                 .when()
                 .get(endPointUri)
                 .asString();
+    }
+
+    public void validateSuccessStatusCode(int jsonResponseCode)
+    {
+        Assert.assertEquals(jsonResponseCode, HttpStatus.OK_200);
+    }
+    public void validateCreatedStatusCode(int jsonResponseCode)
+    {
+        Assert.assertEquals(jsonResponseCode,HttpStatus.CREATED_201);
+    }
+    public void validateNotFoundStatusCode(int jsonResponseCode)
+    {
+        Assert.assertEquals(jsonResponseCode,HttpStatus.NOT_FOUND_404);
+    }
+    public void validateDeleteStatusCode(int jsonResponseCode)
+    {
+        Assert.assertEquals(jsonResponseCode,HttpStatus.NO_CONTENT_204);
     }
 }

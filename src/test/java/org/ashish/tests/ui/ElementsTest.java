@@ -1,42 +1,41 @@
 package org.ashish.tests.ui;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
+import org.ashish.base.BaseTest;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LoginTest {
+public class ElementsTest extends BaseTest {
 
-    WebDriver driver;
 
     @BeforeMethod
     public void setUp() {
-        ChromeOptions chromeOptions = new ChromeOptions();
+
         WebDriverManager.chromedriver().setup();
+        ChromeOptions chromeOptions = new ChromeOptions();
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
+        driver.get("https://www.demoqa.com");
     }
 
     @Test
-    public void loginTest()
+    public void textBoxTest()
     {
-        driver.get("https://www.demoqa.com");
+        extentTest = extentReports.startTest("Text Box Test");
+
+
 
     }
 
     @Test
-    public void loginTest2()
+    public void checkBoxTest()
     {
-        driver.get("https://www.demoqa.com");
+        extentTest = extentReports.startTest("Check Box Test");
+
 
     }
 
-    @AfterMethod
-    public void tearUp() {
-        driver.quit();
-    }
 
 }

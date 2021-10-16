@@ -1,0 +1,8 @@
+<suite name="testingUIAndAPI">
+    <test name="testngTest">
+        <classes>
+            <class name="org.ashish.tests.api.UserServiceTest"/>
+            <class name="org.ashish.tests.ui.ElementsTest"/>
+        </classes>
+    </test>
+</suite>

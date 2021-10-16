@@ -2,7 +2,7 @@ package org.ashish.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UserService {
+public class UserServiceRequest {
 
 
     @JsonProperty("name")
