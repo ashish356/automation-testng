@@ -80,6 +80,22 @@ public class UICommonFunctions {
         javascriptExecutor.executeScript("arguments[0].style.border=''",element);
     }
 
+
+    public  void highlightField(WebElement element)
+    {
+
+        JavascriptExecutor javascriptExecutor=(JavascriptExecutor) driver;
+        javascriptExecutor.executeScript("arguments[0].style.border='4px groove green'",element );
+        try
+        {
+            Thread.sleep(1000);
+        }catch (InterruptedException e)
+        {
+            throw new RuntimeException(e);
+        }
+        javascriptExecutor.executeScript("arguments[0].style.border=''",element);
+    }
+
     public void mouseover(By object)
     {
 
@@ -120,6 +136,19 @@ public class UICommonFunctions {
     {
 
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(object));
+        try
+        {
+            Thread.sleep(1000);
+        }catch (InterruptedException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void scrollTillElement(WebElement element)
+    {
+
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
         try
         {
             Thread.sleep(1000);
