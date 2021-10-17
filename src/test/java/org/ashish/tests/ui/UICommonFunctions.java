@@ -42,6 +42,11 @@ public class UICommonFunctions {
         WebDriverWait webDriverWait=new WebDriverWait(driver,20);
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(object));
     }
+    public void explicitWait(WebElement webElement)
+    {
+        WebDriverWait webDriverWait=new WebDriverWait(driver,20);
+        webDriverWait.until(ExpectedConditions.visibilityOf(webElement));
+    }
 
     public String getText(By object)
     {
@@ -198,6 +203,11 @@ public class UICommonFunctions {
     public boolean isElementDisplayed(By object)
     {
         return driver.findElement(object).isDisplayed();
+    }
+    public boolean isElementDisplayed(WebElement webElement)
+    {
+
+        return webElement.isDisplayed();
     }
 
 }

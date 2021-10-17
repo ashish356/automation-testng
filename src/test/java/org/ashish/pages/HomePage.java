@@ -9,17 +9,15 @@ import org.openqa.selenium.support.PageFactory;
 public class HomePage {
 
     WebDriver driver;
-
     UICommonFunctions uiCommonFunctions;
 
-    @FindBy(xpath = "//div[@class='card-up']")
-    WebElement elementLink;
+    @FindBy(xpath = "(//div[@class='card mt-4 top-card'])[1]")
+    WebElement elementsLink;
 
-    @FindBy(xpath = "//span[text()='Text Box']")
-    WebElement textBoxLink;
+    @FindBy(xpath = "(//div[@class='card mt-4 top-card'])[3]")
+    WebElement alertFormAndWindowsLink;
 
-    @FindBy(xpath = "//span[text()='Check Box']")
-    WebElement checkBoxLink;
+
 
     public HomePage(WebDriver driver)
     {
@@ -28,21 +26,24 @@ public class HomePage {
         uiCommonFunctions=new UICommonFunctions(driver);
     }
 
-    public void clickElementLink()
-    {
-        uiCommonFunctions.highlightField(elementLink);
-        elementLink.click();
+    public void clickAlertFormAndWindowsLink() {
+
+        uiCommonFunctions.highlightField(alertFormAndWindowsLink);
+        alertFormAndWindowsLink.click();
     }
 
-    public void clickTextBoxLink()
-    {
-        uiCommonFunctions.highlightField(textBoxLink);
-        textBoxLink.click();
+    public void clickElementLink() {
+
+        uiCommonFunctions.highlightField(elementsLink);
+        elementsLink.click();
     }
-    public void clickCheckBoxLink()
+
+
+    public void explicitWaitForElementLink()
     {
-        uiCommonFunctions.highlightField(checkBoxLink);
-        checkBoxLink.click();
+
+        uiCommonFunctions.explicitWait(elementsLink);
     }
+
 
 }
