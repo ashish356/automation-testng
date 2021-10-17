@@ -3,6 +3,7 @@
         <classes>
             <class name="org.ashish.tests.api.UserServiceTest"/>
             <class name="org.ashish.tests.ui.ElementsTest"/>
+            <class name="org.ashish.tests.ui.AlertFrameAndWindowsTest"/>
         </classes>
     </test>
 </suite>
