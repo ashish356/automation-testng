@@ -45,4 +45,71 @@ public class AlertFrameAndWindowsTest extends BaseTest {
         ModalDialogsPage modalDialogsPage=new ModalDialogsPage(driver);
         modalDialogsPage.validateLargeModalDialogButton();
     }
+
+    @Test
+    public void alertTest() throws Exception {
+        extentTest = extentReports.startTest("Alert Test");
+        HomePage homePage=new HomePage(driver);
+        homePage.explicitWaitForElementLink();
+        homePage.clickAlertFormAndWindowsLink();
+        AlertFormAndWindowsPage alertFormAndWindowsPage=new AlertFormAndWindowsPage(driver);
+        alertFormAndWindowsPage.clickAlertLink();
+        AlertPage alertPage=new AlertPage(driver);
+        alertPage.validateAlert();
+
+
+    }
+
+    @Test
+    public void timerAlertTest() throws Exception {
+        extentTest = extentReports.startTest("Timer Alert Test");
+        HomePage homePage=new HomePage(driver);
+        homePage.explicitWaitForElementLink();
+        homePage.clickAlertFormAndWindowsLink();
+        AlertFormAndWindowsPage alertFormAndWindowsPage=new AlertFormAndWindowsPage(driver);
+        alertFormAndWindowsPage.clickAlertLink();
+        AlertPage alertPage=new AlertPage(driver);
+        alertPage.validateTimerAlert();
+
+
+    }
+
+    @Test
+    public void confirmAcceptAlertTest() throws Exception {
+        extentTest = extentReports.startTest("Confirm Accept Alert Test");
+        HomePage homePage=new HomePage(driver);
+        homePage.explicitWaitForElementLink();
+        homePage.clickAlertFormAndWindowsLink();
+        AlertFormAndWindowsPage alertFormAndWindowsPage=new AlertFormAndWindowsPage(driver);
+        alertFormAndWindowsPage.clickAlertLink();
+        AlertPage alertPage=new AlertPage(driver);
+        alertPage.validateConfirmAcceptAlert();
+
+    }
+
+    @Test
+    public void confirmDismissAlertTest() throws Exception {
+        extentTest = extentReports.startTest("Confirm Accept Dismiss Test");
+        HomePage homePage=new HomePage(driver);
+        homePage.explicitWaitForElementLink();
+        homePage.clickAlertFormAndWindowsLink();
+        AlertFormAndWindowsPage alertFormAndWindowsPage=new AlertFormAndWindowsPage(driver);
+        alertFormAndWindowsPage.clickAlertLink();
+        AlertPage alertPage=new AlertPage(driver);
+        alertPage.validateConfirmCancelAlert();
+
+    }
+
+    @Test
+    public void promptAlertTest() throws Exception {
+        extentTest = extentReports.startTest("Prompt Alert Test");
+        HomePage homePage=new HomePage(driver);
+        homePage.explicitWaitForElementLink();
+        homePage.clickAlertFormAndWindowsLink();
+        AlertFormAndWindowsPage alertFormAndWindowsPage=new AlertFormAndWindowsPage(driver);
+        alertFormAndWindowsPage.clickAlertLink();
+        AlertPage alertPage=new AlertPage(driver);
+        alertPage.validatePromptAlert();
+
+    }
 }

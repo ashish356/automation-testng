@@ -23,11 +23,19 @@ public class AlertFormAndWindowsPage {
     @FindBy(xpath = "//span[text()='Modal Dialogs']")
     WebElement modalDialogLink;
 
+    @FindBy(xpath = "//span[text()='Alerts']")
+    WebElement alertLink;
 
     public void clickModalDialogsLink()
     {
         uiCommonFunctions.scrollTillElement(new ElementsPage(driver).elementsLink);
         uiCommonFunctions.highlightField(modalDialogLink);
         modalDialogLink.click();
+    }
+    public void clickAlertLink()
+    {
+
+        uiCommonFunctions.highlightField(alertLink);
+        alertLink.click();
     }
 }
