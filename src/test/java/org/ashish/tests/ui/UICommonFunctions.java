@@ -1,21 +1,36 @@
 package org.ashish.tests.ui;
 
+import com.relevantcodes.extentreports.LogStatus;
+import org.apache.commons.io.FileUtils;
+import org.ashish.base.BaseTest;
+import org.ashish.tests.api.UserServiceTest;
+import org.junit.Assert;
+import org.kohsuke.rngom.parse.host.Base;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
-public class UICommonFunctions {
+public class UICommonFunctions extends BaseTest {
 
     private final WebDriver driver;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UICommonFunctions.class);
 
     public UICommonFunctions(WebDriver driver)
     {
         this.driver=driver;
     }
+
+
 
     public void click(By object)
     {
@@ -209,5 +224,96 @@ public class UICommonFunctions {
 
         return webElement.isDisplayed();
     }
+
+    public void takeScreenShot(String stepName)
+    {
+        // fileName of the screenshot
+        final String screenshotFileName = createTimeStampForFileName(new Date());
+        // store screenshot in that file
+        final File screenShotImage = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+        try
+
+        {
+            FileUtils.copyFile(
+                    screenShotImage,
+                    new File(
+                            System.getProperty("user.dir")
+                                    + "/reports/"
+                                    + file
+                                    + "/screenshot/"
+                                    + screenshotFileName
+                                    + "_"
+                                    + stepName
+                                    + ".jpg"));
+        } catch(IOException e)
+        {
+
+            writeFailInReports(String.format("Exception is : %s" ,e));
+        }
+        // put screenshot file in reports
+        extentTest.log(
+                LogStatus.INFO,
+                "Screenshot-> "
+                        +stepName
+                        +extentTest.addScreenCapture(
+                        System.getProperty("user.dir")
+                                +"/reports/"
+                                +file
+                                +"/screenshot/"
+                                +screenshotFileName
+                                +"_"
+                                +stepName
+                                +".jpg"));
+    }
+
+    public void capture(String stepName)
+    {
+
+        final File screenShotImage = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+        try
+
+        {
+            FileUtils.copyFile(
+                    screenShotImage,
+                    new File(
+                            System.getProperty("user.dir")
+                                    + "/screenshots/"
+                                    + stepName
+                                    + ".png"));
+        } catch(IOException e)
+        {
+
+            writeFailInReports(String.format("Exception is : %s" ,e));
+        }
+
+    }
+
+
+    public void writeInfoInReports(String message) {
+        extentTest.log(LogStatus.INFO, message);
+        LOGGER.info(message);
+
+    }
+
+    public void writePassInReports(String message) {
+        extentTest.log(LogStatus.PASS, message);
+        LOGGER.info(message);
+
+    }
+
+    public void writeFailInReports(String message) {
+        extentTest.log(LogStatus.FAIL, message);
+        LOGGER.info(message);
+        Assert.fail(message);
+
+    }
+
+
+
+
+
+
 
 }

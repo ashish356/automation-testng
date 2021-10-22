@@ -14,8 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 
 import java.io.File;
+import java.util.Date;
 
 
 public class BaseTest {
@@ -23,18 +25,21 @@ public class BaseTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceTest.class);
 
-    public static final ExtentReports extentReports = ExtentManager.getInstance();
+    public static ExtentReports extentReports;
     public static ExtentTest extentTest;
     public WebDriver driver;
+    public static String file;
 
+    @BeforeTest
+    public void initialSetUp() {
 
-    @BeforeMethod
-    public void setUp() {
         createDirectoryIfDoesNotExist("reports");
-        System.out.println("I am inside Before Moethod of Bast Test");
+        createDirectoryIfDoesNotExist("testResultsDocFile");
+        file=createTimeStampForFileName(new Date());
+        extentReports=ExtentManager.getInstance();
     }
 
-    private void createDirectoryIfDoesNotExist(final String directoryName) {
+    protected void createDirectoryIfDoesNotExist(final String directoryName) {
         final File directory = new File(Constants.PROJECT_DIRECTORY + "/" + directoryName);
         if (!directory.exists()) {
             directory.mkdir();
@@ -59,4 +64,9 @@ public class BaseTest {
             }
 
         }
+
+    public static String createTimeStampForFileName(Date date)
+    {
+        return date.toString().replace(":","_").replace(" ","_");
+    }
     }

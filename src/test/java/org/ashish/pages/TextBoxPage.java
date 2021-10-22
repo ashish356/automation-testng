@@ -81,6 +81,7 @@ public class TextBoxPage {
         uiCommonFunctions.scrollTillElement(permanentAddressTextBox);
         this.clickSubmitButton();
         uiCommonFunctions.highlightField(outPutForm);
+        uiCommonFunctions.capture("TextBoxPage");
         Assert.assertTrue(outPutForm.isDisplayed());
 
     }
