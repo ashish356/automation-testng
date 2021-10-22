@@ -4,4 +4,6 @@
 .idea/
 target/
 reports/
+screenshots/
+testResultsDocFile/
 debug.log
