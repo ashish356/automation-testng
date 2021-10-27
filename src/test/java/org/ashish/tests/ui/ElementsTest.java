@@ -50,18 +50,21 @@ public class ElementsTest extends BaseTest {
     }
 
     @Test
-    public void radioButtonTest() {
+    public void radioButtonTest() throws Exception {
         extentTest = extentReports.startTest("Radio Button Test");
+        String testCaseName="Radio Button Test Validation";
+        UICommonFunctions uiCommonFunctions=new UICommonFunctions(driver);
         HomePage homePage=new HomePage(driver);
         homePage.explicitWaitForElementLink();
         homePage.clickElementLink();
         ElementsPage elementsPage=new ElementsPage(driver);
         elementsPage.explicitWaitForRadioButtonLink();
         elementsPage.clickRadioButtonLink();
+        uiCommonFunctions.capture("RadioButton Page");
+        uiCommonFunctions.takeScreenShot("RadioButton Page");
         RadioButtonPage radioButtonPage=new RadioButtonPage(driver);
         radioButtonPage.validateYesRadioButton();
-
-
+        SaveDocument.createDoc(testCaseName,new String[]{"RadioButton Page"});
     }
 
 

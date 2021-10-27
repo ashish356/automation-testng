@@ -3,6 +3,7 @@ package org.ashish.tests.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relevantcodes.extentreports.LogStatus;
 import org.ashish.base.BaseTest;
+import org.ashish.model.UserServiceCreateResponse;
 import org.ashish.model.UserServiceRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,33 @@ public class UserServiceTest extends BaseTest {
             apiCommonFunctions.validateCreatedStatusCode(apiCommonFunctions.getJsonResponseStatusCodeForPostRequest(endPointUri,jsonRequestBody));
             String jsonResponseBody=apiCommonFunctions.getJsonResponseBodyForPostRequest(endPointUri,jsonRequestBody);
             extentTest.log(LogStatus.INFO,"Json Response body is :" +jsonResponseBody);
+        }
+        catch (Exception e)
+        {
+            Assert.fail(String.format("Exception is  %s", e));
+        }
+
+    }
+    @Test
+    public void createUserTest2()
+    {
+
+        final String endPointUri="https://reqres.in/api/users";
+
+        try {
+            extentTest = extentReports.startTest("Create User Service Test");
+            extentTest.log(LogStatus.INFO,"Endpoint URI is :" +endPointUri);
+            UserServiceRequest userServiceRequest =new UserServiceRequest();
+            userServiceRequest.setJob("leader");
+            userServiceRequest.setName("morpheus");
+            String jsonRequestBody = new ObjectMapper().writeValueAsString(userServiceRequest);
+            extentTest.log(LogStatus.INFO,"Json Request body is :" +jsonRequestBody);
+            apiCommonFunctions.validateCreatedStatusCode(apiCommonFunctions.getJsonResponseStatusCodeForPostRequest(endPointUri,jsonRequestBody));
+            String jsonResponseBody=apiCommonFunctions.getJsonResponseBodyForPostRequest(endPointUri,jsonRequestBody);
+            extentTest.log(LogStatus.INFO,"Json Response body is :" +jsonResponseBody);
+            final UserServiceCreateResponse userServiceCreateResponse=new ObjectMapper().readValue(jsonResponseBody,UserServiceCreateResponse.class);
+            extentTest.log(LogStatus.INFO, "Value of id is :" +userServiceCreateResponse.getId());
+            extentTest.log(LogStatus.INFO, "Value of created date is :" +userServiceCreateResponse.getCreatedAt());
         }
         catch (Exception e)
         {
@@ -114,6 +142,7 @@ public class UserServiceTest extends BaseTest {
             Assert.fail(String.format("Exception is  %s", e));
         }
     }
+
 
 
 }
