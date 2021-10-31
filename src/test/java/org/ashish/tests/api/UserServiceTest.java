@@ -1,12 +1,15 @@
 package org.ashish.tests.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableMap;
 import com.relevantcodes.extentreports.LogStatus;
 import org.ashish.base.BaseTest;
+import org.ashish.exceptions.CustomException;
 import org.ashish.model.UserServiceCreateResponse;
 import org.ashish.model.UserServiceRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -122,6 +125,7 @@ public class UserServiceTest extends BaseTest {
         }
         catch (Exception e)
         {
+
             Assert.fail(String.format("Exception is  %s", e));
         }
     }
@@ -144,5 +148,30 @@ public class UserServiceTest extends BaseTest {
     }
 
 
+    @Test
+    public void testExceptionClass() throws CustomException {
 
+        extentTest = extentReports.startTest("Validating Implementation of Exception Class");
+        if(1==2)
+        {
+            writeInfoInReports("This is strange");
+        }
+        else
+        {
+            writePassInReports("Validation is successful");
+            throw new CustomException("1 can never be equal to 2");
+        }
+    }
+
+    @Autowired protected ImmutableMap<String,String> marketCodeByCountry;
+
+    @Test
+    public void testMarketCodeMethod()  {
+
+        extentTest = extentReports.startTest("Validating Market Code Method");
+        String marketCode = marketCodeByCountry.get("UK");
+        extentTest.log(LogStatus.INFO,"Market Code For UK is :" +marketCode);
+
+
+    }
 }

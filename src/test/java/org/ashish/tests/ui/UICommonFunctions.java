@@ -1,5 +1,6 @@
 package org.ashish.tests.ui;
 
+import com.google.common.collect.ImmutableMap;
 import com.relevantcodes.extentreports.LogStatus;
 import org.apache.commons.io.FileUtils;
 import org.ashish.base.BaseTest;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 
 import java.io.File;
 import java.io.IOException;
@@ -287,26 +289,6 @@ public class UICommonFunctions extends BaseTest {
 
             writeFailInReports(String.format("Exception is : %s" ,e));
         }
-
-    }
-
-
-    public void writeInfoInReports(String message) {
-        extentTest.log(LogStatus.INFO, message);
-        LOGGER.info(message);
-
-    }
-
-    public void writePassInReports(String message) {
-        extentTest.log(LogStatus.PASS, message);
-        LOGGER.info(message);
-
-    }
-
-    public void writeFailInReports(String message) {
-        extentTest.log(LogStatus.FAIL, message);
-        LOGGER.info(message);
-        Assert.fail(message);
 
     }
 
