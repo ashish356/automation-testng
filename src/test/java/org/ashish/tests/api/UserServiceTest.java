@@ -165,7 +165,7 @@ public class UserServiceTest extends BaseTest {
 
     @Autowired protected ImmutableMap<String,String> marketCodeByCountry;
 
-    @Test
+    @Test(enabled =false)
     public void testMarketCodeMethod()  {
 
         extentTest = extentReports.startTest("Validating Market Code Method");
