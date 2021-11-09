@@ -5,15 +5,14 @@ import com.google.common.collect.ImmutableMap;
 import com.relevantcodes.extentreports.LogStatus;
 import org.ashish.base.BaseTest;
 import org.ashish.exceptions.CustomException;
-import org.ashish.model.UserServiceCreateResponse;
-import org.ashish.model.UserServiceRequest;
-import org.ashish.model.UserServiceRequestUsingBuilder;
-import org.ashish.model.UserServiceResponseForBuilder;
+import org.ashish.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.annotations.*;
+
+import java.util.stream.Collectors;
 
 public class UserServiceTest extends BaseTest {
 
@@ -126,6 +125,39 @@ public class UserServiceTest extends BaseTest {
             apiCommonFunctions.validateSuccessStatusCode(apiCommonFunctions.getJsonResponseStatusCodeForGetRequest(endPointUri));
             String jsonResponseBody=apiCommonFunctions.getJsonResponseBodyForGetRequest(endPointUri);
             extentTest.log(LogStatus.INFO,"Json Response body is :" +jsonResponseBody);
+        }
+        catch (Exception e)
+        {
+            Assert.fail(String.format("Exception is  %s", e));
+        }
+    }
+
+    @Test
+    public void getListOfAllUsersTestNew()
+    {
+        final String endPointUri="https://reqres.in/api/users?page=2";
+        try
+        {
+            extentTest = extentReports.startTest("Get List Of All Users Service Test");
+            extentTest.log(LogStatus.INFO,"Endpoint URI is :" +endPointUri);
+            apiCommonFunctions.validateSuccessStatusCode(apiCommonFunctions.getJsonResponseStatusCodeForGetRequest(endPointUri));
+            String jsonResponseBody=apiCommonFunctions.getJsonResponseBodyForGetRequest(endPointUri);
+            extentTest.log(LogStatus.INFO,"Json Response body is :" +jsonResponseBody);
+            final GetListOfAllUsersResponse getListOfAllUsersResponse = new ObjectMapper().readValue(jsonResponseBody, GetListOfAllUsersResponse.class);
+            extentTest.log(LogStatus.INFO,"Value of page is :" +getListOfAllUsersResponse.getPage());
+            extentTest.log(LogStatus.INFO,"Value of per page is :" +getListOfAllUsersResponse.getPerPage());
+            extentTest.log(LogStatus.INFO,"Value of total is :" +getListOfAllUsersResponse.getTotal());
+            extentTest.log(LogStatus.INFO,"Value of total pages are :" +getListOfAllUsersResponse.getTotalPages());
+            extentTest.log(LogStatus.INFO,"Value of data size is :" +getListOfAllUsersResponse.getData().size());
+            extentTest.log(LogStatus.INFO,"Value of support url  is :" +getListOfAllUsersResponse.getSupport().getUrl());
+            extentTest.log(LogStatus.INFO,"Value of support text  is :" +getListOfAllUsersResponse.getSupport().getText());
+            extentTest.log(LogStatus.INFO,"Value of first id is :" +getListOfAllUsersResponse.getData().get(0).getId());
+            extentTest.log(LogStatus.INFO,"Value of ids are :" +getListOfAllUsersResponse.getData().
+                    stream().map(Datum::getId).
+                    collect(Collectors.toList()));
+            extentTest.log(LogStatus.INFO,"Value of avatar are :" +getListOfAllUsersResponse.getData().
+                    stream().map(Datum::getAvatar).
+                    collect(Collectors.toList()));
         }
         catch (Exception e)
         {
