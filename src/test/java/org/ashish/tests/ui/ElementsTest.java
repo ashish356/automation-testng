@@ -1,16 +1,18 @@
 package org.ashish.tests.ui;
 
+import com.relevantcodes.extentreports.LogStatus;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.ashish.base.BaseTest;
-import org.ashish.pages.ElementsPage;
-import org.ashish.pages.HomePage;
-import org.ashish.pages.RadioButtonPage;
-import org.ashish.pages.TextBoxPage;
+import org.ashish.pages.*;
 import org.ashish.utils.SaveDocument;
+import org.bouncycastle.jce.exception.ExtCertPathBuilderException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
+import java.util.Set;
 
 
 public class ElementsTest extends BaseTest {
@@ -24,7 +26,78 @@ public class ElementsTest extends BaseTest {
         ChromeOptions chromeOptions = new ChromeOptions();
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
-        driver.get("https://www.demoqa.com");
+        //driver.get("https://www.demoqa.com");
+        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        //driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+        //driver.get("https://rahulshettyacademy.com/angularpractice/");
+
+    }
+
+    @Test
+    public void newTabValidation() throws InterruptedException {
+        extentTest = extentReports.startTest("New Tab validation");
+        RahulShettyPractisePage rahulShettyPractisePage=new RahulShettyPractisePage(driver);
+        String parentWindowName=driver.getWindowHandle();
+        extentTest.log(LogStatus.INFO, "Parent Tab name is " +parentWindowName);
+        rahulShettyPractisePage.clickNewTab();
+        Thread.sleep(5000);
+        Set<String> windows=driver.getWindowHandles();
+        for(String window: windows)
+        {
+            if(!window.equals(parentWindowName))
+            {
+                driver.switchTo().window(window);
+                extentTest.log(LogStatus.INFO, "New Tab name is " +window);
+                RahulShettyAcademyPage rahulShettyAcademyPage=new RahulShettyAcademyPage(driver);
+                rahulShettyAcademyPage.validateCourseTabIsPresent();
+                driver.close();
+                Thread.sleep(2000);
+            }
+        }
+
+    }
+
+    @Test
+    public void newWindowValidation() throws InterruptedException {
+        extentTest = extentReports.startTest("New Tab validation");
+        RahulShettyPractisePage rahulShettyPractisePage=new RahulShettyPractisePage(driver);
+        String parentWindowName=driver.getWindowHandle();
+        extentTest.log(LogStatus.INFO, "Parent Tab name is " +parentWindowName);
+        rahulShettyPractisePage.clickNewWindow();
+        Thread.sleep(5000);
+        Set<String> windows=driver.getWindowHandles();
+        for(String window: windows)
+        {
+            if(!window.equals(parentWindowName))
+            {
+                driver.switchTo().window(window);
+                extentTest.log(LogStatus.INFO, "New Tab name is " +window);
+                RahulShettyAcademyPage rahulShettyAcademyPage=new RahulShettyAcademyPage(driver);
+                rahulShettyAcademyPage.validateCourseTabIsPresent();
+                driver.close();
+                Thread.sleep(2000);
+            }
+        }
+
+    }
+
+
+    @Test
+    public void tagsValidation()  {
+        extentTest = extentReports.startTest("Tags validation");
+        RahulShettyPractisePage rahulShettyPractisePage=new RahulShettyPractisePage(driver);
+        List<String> tags=rahulShettyPractisePage.getAllTags();
+        if(rahulShettyPractisePage.tagIsPresent())
+        {
+            extentTest.log(LogStatus.INFO, "Tag is present. Tag size is :" +tags.size());
+        }
+        for(int i=0;i<tags.size();i++)
+        {
+            extentTest.log(LogStatus.INFO,"Tag name is :" +tags.get(i));
+        }
+
+
+
 
     }
 
