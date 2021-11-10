@@ -96,7 +96,16 @@ public class ElementsTest extends BaseTest {
             extentTest.log(LogStatus.INFO,"Tag name is :" +tags.get(i));
         }
 
+    }
 
+    @Test
+    public void elementDisplayedValidation()  {
+
+        extentTest = extentReports.startTest("Element Displayed validation");
+        RahulShettyPractisePage rahulShettyPractisePage=new RahulShettyPractisePage(driver);
+        rahulShettyPractisePage.clickHideTextBox();
+        extentTest.log(LogStatus.INFO, "Hide Text Box is clicked");
+        rahulShettyPractisePage.validateDisplayTextIsPresent();
 
 
     }
