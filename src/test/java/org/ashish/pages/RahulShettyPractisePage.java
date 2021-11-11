@@ -6,9 +6,9 @@ import org.ashish.tests.ui.UICommonFunctions;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +41,29 @@ public class RahulShettyPractisePage extends BaseTest {
     @FindBy(id = "displayed-text")
     WebElement displayText;
 
+    @FindBy(id = "mousehover")
+    WebElement mouseOver;
+
+    @FindBy(xpath = "//a[text()='Top']")
+    WebElement mouseOverTopDropDown;
+
+    @FindBy(xpath = "(//a[text()='Home'])[1]")
+    WebElement iFrameHomeText;
+
+    public void clickTopDropDown()
+    {
+        uiCommonFunctions.highlightField(mouseOverTopDropDown);
+        mouseOverTopDropDown.click();
+    }
+
+    public void mouseOverValidation() throws InterruptedException {
+        uiCommonFunctions.scrollTillElement(mouseOver);
+        Actions actions=new Actions(driver);
+        actions.moveToElement(mouseOver).build().perform();
+        Thread.sleep(2000);
+        clickTopDropDown();
+    }
+
     public void clickHideTextBox()
     {
         uiCommonFunctions.highlightField(hideTextBox);
@@ -51,6 +74,12 @@ public class RahulShettyPractisePage extends BaseTest {
     {
 
         return displayText.isDisplayed();
+    }
+
+    public boolean IFrameHomeTextIsPresent()
+    {
+
+        return iFrameHomeText.isDisplayed();
     }
 
     public void validateDisplayTextIsPresent()
@@ -64,6 +93,21 @@ public class RahulShettyPractisePage extends BaseTest {
            extentTest.log(LogStatus.FAIL,"Display text is not present");
            Assert.fail();
        }
+    }
+
+    public void validateIFrameHomeTextIsPresent()
+    {
+        if(IFrameHomeTextIsPresent())
+        {
+            uiCommonFunctions.scrollTillElement(iFrameHomeText);
+            uiCommonFunctions.highlightField(iFrameHomeText);
+            extentTest.log(LogStatus.PASS,"IFrame Home text is present");
+        }
+        else
+        {
+            extentTest.log(LogStatus.FAIL,"IFrame Home text is not present");
+            Assert.fail();
+        }
     }
 
     public void clickNewTab()

@@ -5,7 +5,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.ashish.base.BaseTest;
 import org.ashish.pages.*;
 import org.ashish.utils.SaveDocument;
-import org.bouncycastle.jce.exception.ExtCertPathBuilderException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeMethod;
@@ -107,8 +106,30 @@ public class ElementsTest extends BaseTest {
         extentTest.log(LogStatus.INFO, "Hide Text Box is clicked");
         rahulShettyPractisePage.validateDisplayTextIsPresent();
 
+    }
+
+    @Test
+    public void iFrameHomeTextValidation()  {
+
+        extentTest = extentReports.startTest("IFrame Course Text  validation");
+        RahulShettyPractisePage rahulShettyPractisePage=new RahulShettyPractisePage(driver);
+        driver.switchTo().frame("courses-iframe");
+        rahulShettyPractisePage.validateIFrameHomeTextIsPresent();
 
     }
+
+    @Test
+    public void mouseOverValidation() throws InterruptedException {
+
+        extentTest = extentReports.startTest("Mouse Over validation");
+        RahulShettyPractisePage rahulShettyPractisePage=new RahulShettyPractisePage(driver);
+
+        rahulShettyPractisePage.mouseOverValidation();
+        Thread.sleep(1000);
+
+
+    }
+
 
     @Test
     public void textBoxTest() throws Exception {
