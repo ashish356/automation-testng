@@ -232,5 +232,4 @@ public class ElementsTest extends BaseTest {
         SaveDocument.createDoc(testCaseName,new String[]{"RadioButton Page"});
     }
 
-
 }
