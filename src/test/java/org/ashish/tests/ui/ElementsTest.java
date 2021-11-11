@@ -5,10 +5,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.ashish.base.BaseTest;
 import org.ashish.pages.*;
 import org.ashish.utils.SaveDocument;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import sun.rmi.runtime.Log;
 
 import java.util.List;
 import java.util.Set;
@@ -129,6 +132,66 @@ public class ElementsTest extends BaseTest {
 
 
     }
+
+
+    @Test
+    public void dropDownValidation() throws InterruptedException {
+
+        extentTest = extentReports.startTest("Drop Down Validation");
+        RahulShettyPractisePage rahulShettyPractisePage=new RahulShettyPractisePage(driver);
+        rahulShettyPractisePage.selectOption1DropDown();
+        Thread.sleep(1000);
+
+
+    }
+
+    @Test
+    public void autoSuggestionValidation() throws InterruptedException {
+
+        extentTest = extentReports.startTest("Auto Suggestion Validation");
+        RahulShettyPractisePage rahulShettyPractisePage=new RahulShettyPractisePage(driver);
+        rahulShettyPractisePage.enterValueOnAutoSuggestion();
+        Thread.sleep(1000);
+
+
+    }
+
+
+    @Test
+    public void printAllWebTableContent()
+    {
+
+        String xpath1="//*[@id='product']//following::tr[";
+        String xpath2="]//td[";
+        String xpath3="]";
+        int cost=0;
+        extentTest = extentReports.startTest("Print Web table Content");
+        WebElement webTable=driver.findElement(By.xpath("//*[@id='product']//following::tbody"));
+        List<WebElement> totalNumberOfRows=webTable.findElements(By.tagName("tr"));
+        WebElement webTableColumns=driver.findElement(By.xpath("//*[@id='product']//following::tbody//tr[2]"));
+        List<WebElement> totalNumberOfColumns=webTableColumns.findElements(By.tagName("td"));
+        extentTest.log(LogStatus.INFO, "Total number of Rows are :" +totalNumberOfRows.size());
+        extentTest.log(LogStatus.INFO, "Total number of Columns are : " +totalNumberOfColumns.size());
+        int totalRows=totalNumberOfRows.size();
+        for(int i=2;i<=totalRows;i++)
+        {
+            for(int j=1;j<=totalNumberOfColumns.size();j++) {
+                String textValue=driver.findElement(By.xpath(xpath1 + i + xpath2 + j + xpath3)).getText();
+                extentTest.log(LogStatus.INFO, "Value is " +textValue);
+
+                if(j==3)
+                {
+                    cost+=Integer.parseInt(textValue);
+                }
+
+            }
+        }
+        extentTest.log(LogStatus.INFO, "Total cost are : " +cost);
+    }
+
+
+
+
 
 
     @Test

@@ -4,11 +4,13 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.ashish.base.BaseTest;
 import org.ashish.tests.ui.UICommonFunctions;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,32 @@ public class RahulShettyPractisePage extends BaseTest {
 
     @FindBy(xpath = "(//a[text()='Home'])[1]")
     WebElement iFrameHomeText;
+
+    @FindBy(id="dropdown-class-example")
+    WebElement dropDown;
+
+    @FindBy(id="autocomplete")
+    WebElement autoSuggestion;
+
+    public void enterValueOnAutoSuggestion() throws InterruptedException {
+        autoSuggestion.sendKeys("India");
+        Thread.sleep(1000);
+        autoSuggestion.sendKeys(Keys.ARROW_DOWN);
+        Thread.sleep(1000);
+        autoSuggestion.sendKeys(Keys.ARROW_DOWN);
+        Thread.sleep(1000);
+        autoSuggestion.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+        uiCommonFunctions.highlightField(autoSuggestion);
+
+    }
+
+    public void selectOption1DropDown()
+    {
+        Select dropdown=new Select(dropDown);
+        dropdown.selectByValue("option1");
+
+    }
 
     public void clickTopDropDown()
     {
@@ -137,5 +165,7 @@ public class RahulShettyPractisePage extends BaseTest {
     {
         return allTags.size()>0;
     }
+
+
 
 }
