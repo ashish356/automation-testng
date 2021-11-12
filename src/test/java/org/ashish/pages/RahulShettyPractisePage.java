@@ -71,6 +71,11 @@ public class RahulShettyPractisePage extends BaseTest {
 
     }
 
+
+    public void scrollTillHideButton()
+    {
+        new UICommonFunctions(driver).scrollTillElement(hideTextBox);
+    }
     public void selectOption1DropDown()
     {
         Select dropdown=new Select(dropDown);
